@@ -52,12 +52,8 @@ alias dlog='docker-logs'
 complete -F _docker-containers dlog
 
 docker-ps-short() {
-  docker ps --format 'table {{.Names}}\t{{.Status}}\t\t{{.Image}}' --all |
-    sed -E 's|(.+?\s\s+)([a-zA-Z0-9\:]+)/.+/([^\s]+)|\1(\2) \3|' |
-    {
-      sed -u 1q
-      sort -k1
-    }
+  docker ps --format 'table {{.Status}}\t{{.Names}}\t\t{{.Image}}' --all |
+    sed -E 's|(.+?\s\s+)([a-zA-Z0-9\:]+)/.+/([^\s]+)|\1(\2) \3|'
 }
 alias dps="docker-ps-short"
 
@@ -92,8 +88,8 @@ alias denv='docker-env'
 complete -F _docker-containers denv
 
 docker-exec() {
-  local IMAGE_NAME="$1"
-  docker exec -it ${IMAGE_NAME} /bin/bash
+  local CONTAINER_NAME="$1"
+  docker exec -it ${CONTAINER_NAME} /bin/bash
 }
 alias dexec='docker-exec'
 complete -F _docker-containers dexec
