@@ -1,0 +1,6 @@
+import rlcompleter, readline
+import sys
+if sys.version_info.major == 3 and sys.version_info.minor >=4:
+    from importlib import reload  # python 3.4+
+
+readline.parse_and_bind('tab:complete')
