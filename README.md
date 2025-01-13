@@ -29,7 +29,7 @@ folder in `$HOME`, while the working directory is set to be `$HOME`.
 In particular,
 
     git init --bare $HOME/.local/share/dotfiles/bare/
-    alias .f='/usr/bin/git --git-dir=$HOME/.local/share/dotfiles/bare/ --work-tree=$HOME'
+    alias .f='/usr/bin/git --git-dir=$HOME/.local/share/dotfiles/bare.repo/ --work-tree=$HOME'
     .f config --local status.showUntrackedFiles no
 
 This way, one can perform `git` style commands for any file in `$HOME`.
@@ -43,3 +43,14 @@ will return if any tracked files have been modified, while
     .f log
 
 will return the commit logs.
+
+## Initalization
+
+You can get the initialization script from an git server. This will
+configure your new PC, and clone the dotfiles in your home folder.
+
+In particular, `init.sh` will:
+
+- generate `ssh` keys,
+- authenticate with known git servers,
+- clone the bare repo in user's `$XDG_DATA_DIR`,
