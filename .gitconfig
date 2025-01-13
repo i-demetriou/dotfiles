@@ -12,6 +12,7 @@
 	ui = auto
 [core]
 	editor = vim
+	excludesfile = ~/.gitignore.global
 	autocrlf = input
 	whitespace = trailing-space,space-before-tab
 [diff]
@@ -28,6 +29,7 @@
 [help]
 	autocorrect = 10
 [init]
+	templateDir = /home/ioannis/.config/git/template
 	defaultBranch = master
 [pull]
 	rebase = true

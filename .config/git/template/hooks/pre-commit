@@ -1,0 +1,15 @@
+#!/bin/bash
+
+DEBUG_MARKERS=(AEL ael3 miaou pouts poutsa)
+
+pattern=$(printf '\\b%s\\b|' "${DEBUG_MARKERS[@]}") # Add word boundaries and ORs
+pattern="${pattern/%|/}"                            # Remove the trailing "|"
+# filter=${DEBUG_MARKERS[@]/#/\|}
+# filter=${filter/#|/}
+# debug_lines=$(git diff --cached | grep -B4 -A5 -E "$filter")
+
+if git diff --cached | grep --color=always -B4 -A5 -E "$pattern"; then
+  echo "Refusing to commit patch with debug markers (One of ${DEBUG_MARKERS[@]})."
+  echo "HINT: Use --no-verify if you think this is a mistake"
+  exit 1
+fi

@@ -1,0 +1,63 @@
+.notes/
+.id3.*
+.ael3.*
+.*.ael3
+*.ael3
+
+# You should NEVER commit your credentials!
+#
+# Instead place them into a local file not part of the repo, and have your
+# build and deploy scripts source them
+CREDENTIALS
+
+# App dot files
+.ctags
+
+# CMake related
+CMakeFiles/
+CMakeCache.txt
+
+# Python
+*.pyc
+__pycache__
+.env/
+venv/
+*.egg-info/
+
+# NodeJS
+node_modules/
+
+# C residuals
+*.bin
+*.ax
+*.ma
+*.o
+
+# IDE specifics
+## vim
+tags
+compile_commands.json
+.ycm_extra_conf.py
+*.swp
+.cache/
+.vimlocal
+
+## Visual Studio
+.vs/
+## Visual Studio Code
+.vscode/
+
+## IntelliJ
+.idea/
+cmake-build-*
+
+## Eclipse
+.cproject
+.settings
+.project
+
+## AppZone C excludes
+build.conf
+file_load
+export.mk
+prod_tool.*

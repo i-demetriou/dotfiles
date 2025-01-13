@@ -1,5 +1,5 @@
 alias gg='git grep -nI --recurse-submodules'
-alias gls='git ls --recurse-submodules'
+alias gls='git ls-files --recurse-submodules'
 
 gf() {
   PATH_REGEX_NAME=$1
