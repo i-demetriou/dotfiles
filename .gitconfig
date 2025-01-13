@@ -1,0 +1,39 @@
+[alias]
+	bblame = blame -w -C -C -C
+	gg = grep -nI --recurse-submodules
+	ls = ls-files --recurse-submodules
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit
+	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+[apply]
+	whitespace = fix
+[branch]
+	sort = -committerdate
+[column]
+	ui = auto
+[core]
+	editor = vim
+	autocrlf = input
+	whitespace = trailing-space,space-before-tab
+[diff]
+	submodule = log
+[fetch]
+	prune = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[gui]
+	pruneDuringFetch = true
+[help]
+	autocorrect = 10
+[init]
+	defaultBranch = master
+[pull]
+	rebase = true
+[push]
+	default = simple
+[rerere]
+	enabled = false
+[status]
+	submodulesummary = 1
