@@ -5,10 +5,10 @@
 # It is assumed that this machine has access to the repo via `git`
 
 SCRIPT_NAME=$0
-BACKUP_DOTFILES=$HOME/.dotfiles-backup
 export PREFIX=${PREFIX:-"$HOME/.local/share"}
 export DOTFILES_D=$PREFIX/dotfiles
 export DOTFILES_REPO=$DOTFILES_D/bare.git
+BACKUP_D=$DOTFILES_D/backup
 REPO_URL=${REPO_URL:-https://github.com/i-demetriou/dotfiles.git}
 USAGE="\
 Usage: $(basename ${SCRIPT_NAME}) [-h|--help]
@@ -68,14 +68,17 @@ clone_naked_repo() {
   if [ $? = 0 ]; then
     echo "Successfully checked out dot files"
   else
-    echo "Conflicts detected. Backing up existing dotfiles to $BACKUP_DOTFILES"
-    echo "Warning: Files backed up in $BACKUP_DOTFILES will not preserve directory structure"
+    local BACKUP=$BACKUP_D/$(date +%Y%m%d-%H%M%S).tar
+    echo "Conflicts detected. Backing up existing dotfiles to $BACKUP"
 
-    mkdir -p ${BACKUP_DOTFILES}
+    mkdir -p ${BACKUP_D}
     pushd $HOME >/dev/null
     .f checkout 2>&1 |
-      egrep "\s+\." | awk {'print $1'} |
-      xargs -I{} mv -vb $(readlink -f "{}") $BACKUP_DOTFILES/
+      egrep "^\s+" | awk {'print $1'} |
+      xargs tar cvaf $BACKUP &&
+      .f checkout 2>&1 |
+      egrep "^\s+" | awk {'print $1'} |
+        xargs rm --verbose
     popd >/dev/null
     .f checkout
   fi
